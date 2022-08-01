@@ -1,10 +1,13 @@
 # Blackjack
 from io_handling import get_keypress, clear_line, move_cursor, clear_lines
-from art import LOGO, DEAL_PROMPT, OPTION_BOXES
+from art import LOGO, DEAL_PROMPT, OPTION_BOXES, end_conditions
 from random import choices
 
 # Ace starts out as 11/ K, Q, and J equal to 10
 deck = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10]
+
+# Contains the game's end condition (WIN, TIE, LOSS)
+end_condition = ''
 
 # Calculates the total for the given hand of cards
 def calculate_total(hand):
@@ -17,9 +20,6 @@ def calculate_total(hand):
         total -= 10
     
     return total
-
-# BOOLEANS
-bust = False
     
 # Printing the logo
 print(LOGO)
@@ -71,7 +71,7 @@ if get_keypress(DEAL_PROMPT, ['Y', 'N', '\r']) != 'N':
     
             # The player's total is now greater than 21 - BUST
             if player_total > 21:
-                bust = True
+                end_condition = "BUST"
                 break
             # The player's total is 21 - BLACKJACK
             elif player_total == 21: break
@@ -86,7 +86,7 @@ if get_keypress(DEAL_PROMPT, ['Y', 'N', '\r']) != 'N':
     else: pass
             
     # Updating the dealer's cards and total
-    if not bust: 
+    if end_condition != "BUST": 
         while cpu_total < 17:
             cpu_hand.extend(choices(deck))
             cpu_total = calculate_total(cpu_hand)
@@ -100,7 +100,8 @@ if get_keypress(DEAL_PROMPT, ['Y', 'N', '\r']) != 'N':
     print(f"{cpu_cards}" + (max_len - len(cpu_cards)) * ' ' + f"  ({cpu_total})\n")
 
     # Check win/ lose conditions
-    # Print results
+    # print(end_conditions[end_condition])
+    print(end_conditions["BLACKJACK"])
         
 # The player chose not to deal - end the game
 else:
@@ -124,6 +125,16 @@ else:
 #     * Reveal the CPU's cards ✔️
 
 #   4. Calculate win or loss
+#     * LOSS:
+#       > BUST - Player total goes over 21 ✔️
+#       > The player total is less than 22 and the CPU total
+#     * TIE:
+#       > PUSH - Both the player and CPU get the same total
+#       > PUSH - Both the player and CPU get 21 (BLACKJACK)
+#     * WIN:
+#       > BLACKJACK - Getting a 21 on the first deal (beats a non-BLACKJACK 21)
+#       > CPU BUST - The CPU total is greater than 21
+#       > The player total is greater than the cpu total but less than 22
 
 #   5. Add replayability
 #   6. Clean up code
