@@ -62,55 +62,39 @@ digits = [
 ]
 
 def get_number(num, smush = False):
-    ascii = digits.copy()
-    num = str(num)
     txt = [''] * 4
+    num = str(num)
+    ascii = []
     
-    for digit in range(len(num)):
-        l_digit = ascii[int(num[digit])]
-        
-        if digit != len(num) - 1:
-            r_digit = ascii[int(num[digit + 1])]
+    for digit in num: ascii.append(digits[int(digit)])
+    
+    for pos in range(len(ascii)):
+        l_digit = ascii[pos]
 
+        if pos != len(num) - 1:
+            r_digit = ascii[pos + 1]
             gaps = []
-            for line in range(len(ascii[0])):
+            for line in range(len(digits[0])):
                 l_gap = len(l_digit[line]) - len(l_digit[line].rstrip(' '))
                 r_gap = len(r_digit[line]) - len(r_digit[line].lstrip(' '))
                 gaps.append(l_gap + r_gap)
             gap = min(gaps) + 1
-            
         else: gap = -1
 
-
-# -----------------------------------------------------------
         for line_num in range(len(l_digit)):
             line = list(l_digit[line_num])
-            
+
             for _ in range(gap):
                 if line[-1] == ' ': line.pop()
                 else:
                     l_char = line[-1]
                     r_char = r_digit[line_num][0]
-
-                    # Left replaces Right:
-                    if r_char == ' ' or l_char == ')' or (l_char, r_char) == ('\\', '|'):
-                        pass
-
-                    # Right replaces Left:
-                    else: line[-1] = r_char
+                    
+                    if r_char != ' ' and l_char != ')':
+                        line[-1] = r_char
+                    ascii[pos + 1][line_num] = ascii[pos + 1][line_num][1:]
 
             txt[line_num] += ''.join(line)
-          
-
     return txt
 
-test = get_number(23)
-for i in test: print(i)
-
-# def smallest_gap(num_1, num_2):
-#     gaps = []
-#     for line in range(len(digits[0])):
-#         l_gap = len(num_1[line]) - len(num_1[line].rstrip(' '))
-#         r_gap = len(num_2[line]) - len(num_2[line].lstrip(' '))
-#         gaps.append(l_gap + r_gap)    
-#     return min(gaps)
+# Test 1999
