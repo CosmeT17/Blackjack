@@ -1,7 +1,7 @@
 # TESTING -------------------------------------------------------------------------
 # import random
-# from replit import clear
-# from readchar import readkey
+from replit import clear
+from readchar import readkey
 # ---------------------------------------------------------------------------------
 digits = [
     [
@@ -64,14 +64,24 @@ digits = [
         "\_, /",
         " /_/ "
     ],
+    [
+        "   ",
+        "   ",
+        " _ ",
+        "( )",
+        "|/ "
+    ]
 ]
 
-def get_number(num, smush = False):
+def get_int(num, smush = False, comma = True):
     txt = [''] * 4
-    num = str(num)
     ascii = []
 
-    for digit in num: ascii.append(digits[int(digit)].copy())
+    if comma: num = "{:,}".format(num)
+    else: num = str(num)
+
+    for digit in num: 
+        ascii.append(digits[int(digit)].copy())
 
     for pos in range(len(ascii)):
         l_digit = ascii[pos]
@@ -104,20 +114,24 @@ def get_number(num, smush = False):
     return txt
 
 # ---------------------------------------------------------------------------------
-# TESTING get_number():
+# TESTING get_int():
 
-# def prt(x): 
-#     for i in x: print(i)
+def prt(x): 
+    for i in x: print(i)
+
+prt(get_int(2674, comma = True))
+
+# prt(get_int(123, True))
 
 # for i in range(10):
 #     for j in range(10):
 #         clear()
-#         prt(get_number(f"{i}{j}"))
-#         prt(get_number(f"{i}{j}", True))
+#         prt(get_int(f"{i}{j}"))
+#         prt(get_int(f"{i}{j}", True))
 #         readkey()
 
 # num = random.randrange(1000000000000)
 # clear()
-# prt(get_number(num))
-# prt(get_number(num, True))
+# prt(get_int(num))
+# prt(get_int(num, True))
 # ---------------------------------------------------------------------------------
