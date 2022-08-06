@@ -48,7 +48,7 @@ digits = {
 }
 
 def get_int(num, smush = False, comma = False):
-    '''Returns the integer num as an ASCII art list.
+    '''Returns the positive integer num as an ASCII art list.
     
     The list is composed of strings, each element being 
     a line in the ASCII art.
@@ -134,7 +134,7 @@ def get_int(num, smush = False, comma = False):
 # def prt(x): 
 #     for i in x: print(i)
 
-# prt(get_int(45237368753, smush = True, comma = True))
+# prt(get_int(7368753, smush = True, comma = True))
 
 # for i in range(10):
 #     for j in range(10):
