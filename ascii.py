@@ -47,6 +47,7 @@ digits = {
           "|/ "]
 }
 
+# Returns an integer as ASCII art
 def get_int(num, smush = False, comma = False):
     '''Returns the positive integer num as an ASCII art list.
     
@@ -125,6 +126,70 @@ def get_int(num, smush = False, comma = False):
             
     # Return txt, which contains the completed ASCII art
     return txt
+
+# Returns the ASCII art of a poker chip
+def poker_chip(num = ''):
+    '''Returns the ASCII art of a poker chip as a list.
+
+    The list is composed of strings, each element being 
+    a line in the ASCII art.
+    
+    The value of the chip can be specified with the positive int num.'''
+
+    # The ASCII art for 1000 and 500 are different than
+    # the ones produced for get_int() for spacing
+    if num == 1000:
+        num = [   
+            " _  __  __  __  ",
+            "/ |/  \/  \/  \ ",
+            "| | () |() |() |",
+            "|_|\__/\__/\__/ "
+        ]
+    elif num == 500:
+        num = [
+            " ___   __   __  ",
+            "| __| /  \ /  \ ",
+            "|__ \| () | () |",
+            "|___/ \__/ \__/ "
+        ]
+
+    # Changing num to ASCII art
+    else: num = get_int(num)
+
+    # Creating and returning the poker chip
+    return [
+        "     xxxooooxxx     ",
+        "   xox        xox   ",
+        " xox            xox ",
+        f"xo{num[0].center(16)}ox",
+        f"xo{num[1].center(16)}ox",
+        f"xo{num[2].center(16)}ox",
+        f"xo{num[3].center(16)}ox",
+        " xox            xox ",
+        "   xox        xox   ",
+        "     xxxxxxxxxx     "
+    ]
+
+# Creating and storing different valued poker chips
+poker_chips = {
+    '1': poker_chip(1),
+    '2': poker_chip(5),
+    '3': poker_chip(25),
+    '4': poker_chip(50),
+    '5': poker_chip(100),
+    '6': poker_chip(500),
+    '7': poker_chip(1000),
+}
+
+# TESTING poker_chips():
+# ---------------------------------------------------------------------------------
+# def prt(x): 
+#     for i in x: print(i)
+
+# for chip in poker_chips:
+#     prt(poker_chips[chip])
+#     print()
+# # ---------------------------------------------------------------------------------
 
 # TESTING get_int():
 # ---------------------------------------------------------------------------------
