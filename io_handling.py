@@ -1,4 +1,5 @@
 from readchar import readkey
+from os import system
 
 # Arrow Keys
 UP = "\x1b\x5b\x41"    # Up Arrow "\x1b[A"
@@ -6,12 +7,13 @@ DOWN =  "\x1b\x5b\x42" # Down Arrow "\x1b[B"
 RIGHT = "\x1b\x5b\x43" # Right Arrow "\x1b[C"
 LEFT = "\x1b\x5b\x44"  # Left Arrow "\x1b[D" 
 
+clear = lambda: system('clear')
 prt = lambda str: print(str, end = '', flush = True)
 clear_line = lambda length: prt(f"{LEFT} {LEFT}" * length)
 
-def clear_lines(length,num_lines):
-    for line in range(num_lines): 
-        prt(UP + ' ' * length + LEFT * length)
+def clear_lines(length, num_lines, del_current_line = True):
+    if del_current_line: print()
+    for line in range(num_lines): prt(UP + ' ' * length + LEFT * length)
 
 def move_cursor(x, y,):
     if y > 0: prt(UP * y)
