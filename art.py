@@ -1,3 +1,5 @@
+# Contains all of the art used in the blackjack file
+
 DEAL_PROMPT = "Deal the next cards (Y/N)?"
 
 LOGO = '''.------.            _     _            _    _            _    
