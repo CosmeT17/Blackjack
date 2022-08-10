@@ -1,3 +1,5 @@
+# Contains the code for playing a game of blackjack
+
 from io_handling import get_keypress, clear_line, move_cursor, clear_lines
 from art import LOGO, DEAL_PROMPT, OPTION_BOXES, end_messages
 from random import choices
@@ -11,6 +13,11 @@ deck = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10]
 
 # Calculates the total for the given hand of cards
 def calculate_total(hand):
+    '''Calculates the total for the given hand of cards.
+    
+    Will automatically convert the value of an Ace to the
+    most advantageous value.'''
+    
     # Calculating the total
     total = sum(hand)
 
@@ -22,6 +29,8 @@ def calculate_total(hand):
     return total
 
 def play_blackjack():
+    "Plays a game of blackjack when called."
+    
     # Contains the game's end condition (WIN, TIE, LOSS)
     end_condition = "WIN"
     
