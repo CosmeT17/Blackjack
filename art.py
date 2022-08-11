@@ -17,17 +17,23 @@ OPTION_BOXES = '''\t -----------          -----------
 \t|    (Y)    |        |    (N)    |
 \t -----------          ----------- '''
 
-end_messages = {
-    # Player wins
-    "PLAYER_BLACKJACK": "You got a BLACKJACK!\nYou Win!",
-    "WIN": "Your total is greater than the computer's.\nYou Win!",
-    "CPU_BUST": "CPU BUST: Computer's total went over 21.\nYou Win!",
+# Contains strings detailing the cpu/ player's ending state
+end_states = {
+    "won": "Won!",
+    "blackjack": "Blackjack!",
+    "lost": "Lost!",
+    "bust": "Bust!",
+    "push": "Push!",
+    "blackjacks": "Blackjack! -> Push!"
+}
 
-    # Player loses
-    "CPU_BLACKJACK": "The computer got a BLACKJACK!\nYou Lose!",
-    "PLAYER_BUST": "BUST: Your total went over 21.\nYou Lose!",
-    "LOSS": "The computer's total is greater.\nYou Lose!",
-
-    # Player ties
-    "TIE": "PUSH: Your total is the same as the computer's.\nYou Tie!"
+# Contains messages indicating the game'a final result based
+# based on the player's ending state
+end_msgs = {
+    "won": "You won!",
+    "blackjack": "You won!",
+    "lost": "You lost!",
+    "bust": "You lost!",
+    "push": "You tied!",
+    "blackjacks": "You tied!"
 }
